@@ -1,7 +1,7 @@
 module ForemanAzure
   class Azure < ComputeResource
     alias_attribute :subscription_id, :user
-    alias_attribute :certificate_path, :url
+    alias_attribute :tenant_id, :url
 
     before_create :test_connection
 
@@ -41,7 +41,6 @@ module ForemanAzure
       args[:vm_name] = args[:name].split('.').first
       args[:cloud_service_name] ||= args[:vm_name]
       args[:vm_user] = Image.find_by_uuid(args[:image]).username
-      args[:private_key_file] = url
       super(args)
     end
 
@@ -60,9 +59,12 @@ module ForemanAzure
 
     def client
       @client ||= Fog::Compute.new(
-        :provider => 'Azure',
-        :azure_sub_id => subscription_id,
-        :azure_pem => certificate_path)
+        :provider         => 'AzureRM',
+        :tenant_id        => tenant_id,
+        :client_id        => client_id,
+        :client_secret    => client_secret,
+        :subscription_id  => subscription_id
+      )
     end
   end
 end

@@ -8,7 +8,7 @@ module ForemanAzure
       Foreman::Plugin.register :foreman_azure do
         requires_foreman '>= 1.8'
         compute_resource(Azure)
-        parameter_filter(ComputeResource, :subscription_id, :certificate_path)
+        parameter_filter(ComputeResource, :tenant_id, :client_id, :client_secret, :subscription_id)
       end
     end
 

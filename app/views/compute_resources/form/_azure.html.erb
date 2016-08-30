@@ -1,5 +1,7 @@
-<%= text_f f, :subscription_id, :label => _('Subscription ID') %>
-<%= text_f f, :certificate_path, :label => _('Certificate path (.pem)'),
+<%= text_f f, :tenant_id, :label => _('Tenant ID') %>
+<%= text_f f, :client_id, :label => _('Client ID') %>
+<%= text_f f, :client_secret, :label => _('Client Secret') %>
+<%= text_f f, :subscription_id, :label => _('Subscription ID'),
   :help_inline => link_to_function(
     _("Test Connection"), "testConnection(this)",
     :class => "btn btn-default",
